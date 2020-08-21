@@ -23,6 +23,7 @@ body { margin: 0; }
 .card .title {
   font-size: 1.7rem;
   padding: 20px;
+  width: 100%;
 }
 
 .cool-button {
@@ -49,6 +50,8 @@ body { margin: 0; }
 }
 .flex-row.align-center { align-items: center }
 .flex { flex-grow: 1; }
+
+.text-center { text-align: center; }
 
 @media(max-width: 500px) {
   #app {
