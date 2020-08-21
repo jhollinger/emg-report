@@ -12,16 +12,24 @@
 
   <body>
     <div id="app">
-      <section id="extremities">
-        <extremity title="Left Upper" color="cyan" form="forms.lu" modal="modal-left-upper"></extremity>
-        <extremity title="Right Upper" color="red" form="forms.ru" modal="modal-right-upper"></extremity>
-        <extremity title="Left Lower" color="purple" form="forms.ll" modal="modal-left-lower"></extremity>
-        <extremity title="Right Lower" color="blue" form="forms.rl" modal="modal-right-lower"></extremity>
-      </section>
+      <!--
+      <div>{{ forms.lu }}</div>
+      -->
+      <extremity id="cranial" title="Cranial Nerves" color="cyan" :form.sync="forms.cn"></extremity>
+      <extremity id="left-upper" title="Left Upper" color="cyan" :form.sync="forms.lu"></extremity>
+      <extremity id="right-upper" title="Right Upper" color="red" :form.sync="forms.ru"></extremity>
+      <extremity id="left-lower" title="Left Lower" color="purple" :form.sync="forms.ll"></extremity>
+      <extremity id="right-lower" title="Right Lower" color="blue" :form.sync="forms.rl"></extremity>
 
-      <section class="card teal lighten-2 white-text">
+      <section id="h-reflex" class="card teal lighten-2 white-text">
         <div class="card-content">
           <span class="card-title">H Reflex</span>
+        </div>
+      </section>
+
+      <section id="rns" class="card teal lighten-2 white-text">
+        <div class="card-content">
+          <span class="card-title">RNS</span>
         </div>
       </section>
 
@@ -30,14 +38,10 @@
           <i class="large material-icons">view_headline</i>
         </a>
         <ul>
+          <li><a class="btn-floating red darken-4" v-on:click="clear()"><i class="material-icons">clear</i></a></li>
           <li><a class="btn-floating blue"><i class="material-icons">content_copy</i></a></li>
         </ul>
       </div>
-
-      <extremity-modal title="Left Upper" tag="modal-left-upper" form="forms.lu"></extremity-modal>
-      <extremity-modal title="Right Upper" tag="modal-right-upper" form="forms.ru"></extremity-modal>
-      <extremity-modal title="Left Lower" tag="modal-left-lower" form="forms.ll"></extremity-modal>
-      <extremity-modal title="Right Lower" tag="modal-right-lower" form="forms.rl"></extremity-modal>
 
       <div id="modal-final" class="modal">
         <div class="modal-content">
@@ -51,26 +55,35 @@
     </div>
 
     <script id="extremity-template" type="text/x-template">
-      <section class="flex-col card lighten-2 white-text" :class="color">
-        <div class="flex card-content">
-          <span class="card-title">{{ title }}</span>
+      <section class="card flex-row lighten-2" :class="color">
+        <div class="flex flex-row align-center white-text">
+          <div class="title">{{ title }}</div>
         </div>
-        <div class="card-action">
-          <button v-on:click="open()" class="waves-effect btn-flat white-text" :class="'waves-'+color">
-            <i class="material-icons left">add</i>
-            Add
-          </button>
-        </div>
+        <button class="cool-button" v-on:click="open()" v-if="!form.added">
+          <i class="material-icons">add</i>
+        </button>
+        <button class="cool-button" v-if="form.added">
+          <i class="material-icons" v-on:click="open()">edit</i>
+        </button>
+        <button class="cool-button" v-if="form.added" v-on:click="remove()">
+          <i class="material-icons">clear</i>
+        </button>
+        <extremity-modal v-if="isOpen" :title="title" :form="form" v-on:update:form="update($event)" v-on:cancel="isOpen = false"v-on:modal="modal = $event"></extremity-modal>
       </section>
     </script>
 
     <script id="extremity-modal-template" type="text/x-template">
-      <div v-bind:id="tag" class="modal">
+      <div class="modal">
         <div class="modal-content">
           <h4>{{ title }}</h4>
-          <p>Form</p>
+          <p>The form</p>
+          <!--
+          <p>Form {{ tmpForm }}</p>
+          <input type="text" v-model="tmpForm.name" />
+          -->
         </div>
         <div class="modal-footer">
+          <button v-on:click="cancel()" class="waves-effect waves-green btn-flat">Cancel</button>
           <button v-on:click="save()" class="waves-effect waves-green btn-flat">Save</button>
         </div>
       </div>
