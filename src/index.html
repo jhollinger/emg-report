@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>EMG Report Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style type="text/css">
+      html, body, #app { height: 100%; }
+      body {
+        margin: 0;
+      }
+      #app {
+        padding: 50px;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-rows: 4fr 1fr;
+        grid-gap: 50px;
+      }
+
+      #extremities {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 50px;
+      }
+
+      #extremities > .card, #app > .card { margin: 0; }
+
+      .flex-col {
+        display: flex;
+        flex-direction: column;
+      }
+      .flex { flex-grow: 1; }
+
+      @media(max-width: 500px) {
+        #app { padding: 20px; }
+        #app, #extremities { grid-gap: 20px }
+        #extremities {
+          grid-template-columns: 1fr;
+          grid-template-rows: 1fr 1fr 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <section id="extremities">
+        <extremity title="Left Upper" color="cyan" form="forms.lu" modal="modal-left-upper"></extremity>
+        <extremity title="Right Upper" color="red" form="forms.ru" modal="modal-right-upper"></extremity>
+        <extremity title="Left Lower" color="purple" form="forms.ll" modal="modal-left-lower"></extremity>
+        <extremity title="Right Lower" color="blue" form="forms.rl" modal="modal-right-lower"></extremity>
+      </section>
+
+      <section class="card teal lighten-2 white-text">
+        <div class="card-content">
+          <span class="card-title">H Reflex</span>
+        </div>
+      </section>
+
+      <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red modal-trigger" href="#modal-final">
+          <i class="large material-icons">view_headline</i>
+        </a>
+        <ul>
+          <li><a class="btn-floating blue"><i class="material-icons">content_copy</i></a></li>
+        </ul>
+      </div>
+
+      <div id="modal-left-upper" class="modal">
+        <div class="modal-content">
+          <h4>Left Upper</h4>
+          <p>Form</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Save</a>
+        </div>
+      </div>
+
+      <div id="modal-right-upper" class="modal">
+        <div class="modal-content">
+          <h4>Right Upper</h4>
+          <p>Form</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Save</a>
+        </div>
+      </div>
+
+      <div id="modal-left-lower" class="modal">
+        <div class="modal-content">
+          <h4>Left Lower</h4>
+          <p>Form</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Save</a>
+        </div>
+      </div>
+
+      <div id="modal-right-lower" class="modal">
+        <div class="modal-content">
+          <h4>Right Lower</h4>
+          <p>Form</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Save</a>
+        </div>
+      </div>
+
+      <div id="modal-final" class="modal">
+        <div class="modal-content">
+          <p>The final data</p>
+          <p>{{ foo }}<p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+      </div>
+    </div>
+
+    <script id="extremity-template" type="text/x-template">
+      <section class="flex-col card lighten-2 white-text" :class="color">
+        <div class="flex card-content">
+          <span class="card-title">{{ title }}</span>
+        </div>
+        <div class="card-action">
+          <button v-on:click="open()" class="waves-effect btn-flat white-text" :class="'waves-'+color">
+            <i class="material-icons left">add</i>
+            Add
+          </button>
+        </div>
+      </section>
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- production version, optimized for size and speed -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+    <script src="app.js"></script>
+  </body>
+</html>
