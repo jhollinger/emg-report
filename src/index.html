@@ -15,19 +15,19 @@
       <!--
       <div>{{ forms.lu }}</div>
       -->
-      <extremity id="cranial" title="Cranial Nerves" color="cyan" :form.sync="forms.cn"></extremity>
+      <extremity id="cranial" title="Cranial Nerves" color="amber" :form.sync="forms.cn"></extremity>
       <extremity id="left-upper" title="Left Upper" color="cyan" :form.sync="forms.lu"></extremity>
       <extremity id="right-upper" title="Right Upper" color="red" :form.sync="forms.ru"></extremity>
       <extremity id="left-lower" title="Left Lower" color="purple" :form.sync="forms.ll"></extremity>
       <extremity id="right-lower" title="Right Lower" color="blue" :form.sync="forms.rl"></extremity>
 
-      <section id="h-reflex" class="card teal lighten-2 white-text">
+      <section id="h-reflex" class="card green lighten-2 white-text">
         <div class="card-content">
           <span class="card-title">H Reflex</span>
         </div>
       </section>
 
-      <section id="rns" class="card teal lighten-2 white-text">
+      <section id="rns" class="card deep-orange lighten-2 white-text">
         <div class="card-content">
           <span class="card-title">RNS</span>
         </div>
@@ -62,8 +62,8 @@
         <button class="cool-button" v-on:click="open()" v-if="!form.added">
           <i class="material-icons">add</i>
         </button>
-        <button class="cool-button" v-if="form.added">
-          <i class="material-icons" v-on:click="open()">edit</i>
+        <button class="cool-button" v-if="form.added" v-on:click="open()">
+          <i class="material-icons">edit</i>
         </button>
         <button class="cool-button" v-if="form.added" v-on:click="remove()">
           <i class="material-icons">clear</i>
