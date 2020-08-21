@@ -1,0 +1,36 @@
+html, body, #app { height: 100%; }
+body {
+  margin: 0;
+}
+
+#app {
+  padding: 50px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: 4fr 1fr;
+  grid-gap: 50px;
+}
+
+#extremities {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 50px;
+}
+
+#extremities > .card, #app > .card { margin: 0; }
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex { flex-grow: 1; }
+
+@media(max-width: 500px) {
+  #app { padding: 20px; }
+  #app, #extremities { grid-gap: 20px }
+  #extremities {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+  }
+}

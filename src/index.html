@@ -6,45 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <style type="text/css">
-      html, body, #app { height: 100%; }
-      body {
-        margin: 0;
-      }
-      #app {
-        padding: 50px;
-        box-sizing: border-box;
-        display: grid;
-        grid-template-rows: 4fr 1fr;
-        grid-gap: 50px;
-      }
-
-      #extremities {
-        display: grid;
-        grid-template-rows: 1fr 1fr;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 50px;
-      }
-
-      #extremities > .card, #app > .card { margin: 0; }
-
-      .flex-col {
-        display: flex;
-        flex-direction: column;
-      }
-      .flex { flex-grow: 1; }
-
-      @media(max-width: 500px) {
-        #app { padding: 20px; }
-        #app, #extremities { grid-gap: 20px }
-        #extremities {
-          grid-template-columns: 1fr;
-          grid-template-rows: 1fr 1fr 1fr 1fr;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="app.css">
   </head>
 
   <body>
@@ -71,45 +34,10 @@
         </ul>
       </div>
 
-      <div id="modal-left-upper" class="modal">
-        <div class="modal-content">
-          <h4>Left Upper</h4>
-          <p>Form</p>
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Save</a>
-        </div>
-      </div>
-
-      <div id="modal-right-upper" class="modal">
-        <div class="modal-content">
-          <h4>Right Upper</h4>
-          <p>Form</p>
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Save</a>
-        </div>
-      </div>
-
-      <div id="modal-left-lower" class="modal">
-        <div class="modal-content">
-          <h4>Left Lower</h4>
-          <p>Form</p>
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Save</a>
-        </div>
-      </div>
-
-      <div id="modal-right-lower" class="modal">
-        <div class="modal-content">
-          <h4>Right Lower</h4>
-          <p>Form</p>
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Save</a>
-        </div>
-      </div>
+      <extremity-modal title="Left Upper" tag="modal-left-upper" form="forms.lu"></extremity-modal>
+      <extremity-modal title="Right Upper" tag="modal-right-upper" form="forms.ru"></extremity-modal>
+      <extremity-modal title="Left Lower" tag="modal-left-lower" form="forms.ll"></extremity-modal>
+      <extremity-modal title="Right Lower" tag="modal-right-lower" form="forms.rl"></extremity-modal>
 
       <div id="modal-final" class="modal">
         <div class="modal-content">
@@ -134,6 +62,18 @@
           </button>
         </div>
       </section>
+    </script>
+
+    <script id="extremity-modal-template" type="text/x-template">
+      <div v-bind:id="tag" class="modal">
+        <div class="modal-content">
+          <h4>{{ title }}</h4>
+          <p>Form</p>
+        </div>
+        <div class="modal-footer">
+          <button v-on:click="save()" class="waves-effect waves-green btn-flat">Save</button>
+        </div>
+      </div>
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
